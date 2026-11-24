@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Petrux Live AI</title>
+<style>
+body{font-family:sans-serif;max-width:420px;margin:auto;padding:20px;background:#f5f5f5}
+.card{background:#fff;padding:14px;border-radius:16px;margin-bottom:12px;display:flex;gap:12px;cursor:pointer;align-items:center}
+.card img{width:60px;height:60px;border-radius:50%;object-fit:cover}
+.upload{background:#fff;padding:16px;border-radius:16px;text-align:center}
+button{background:#25D366;border:none;padding:12px 20px;border-radius:20px;font-weight:bold;cursor:pointer}
+</style>
+</head>
+<body>
+<h1>Petrux Live AI 🔥</h1>
+<p>Choose who to video-call</p>
+
+<div class="card" onclick="startCall('Alex','Friendly Male AI')">
+<img src="https://i.pravatar.cc/300?img=12"><div><b>Alex</b><br><small>Friendly Male AI</small></div>
+</div>
+
+<div class="card" onclick="startCall('Ava','Warm Female AI')">
+<img src="https://i.pravatar.cc/300?img=47"><div><b>Ava</b><br><small>Warm Female AI</small></div>
+</div>
+
+<div class="card" onclick="startCall('Max Innovator','Fictional Teacher - Learn about Elon, Tech & Business')">
+<img src="https://i.pravatar.cc/300?img=68"><div><b>Max Innovator</b><br><small>Learn about Elon, Tech & Business</small></div>
+</div>
+
+<div class="upload">
+<h3>+ Upload Your Photo</h3>
+<p>Your own photo only. Not a celebrity.</p>
+<input type="file" accept="image/*" id="photoInput"><br><br>
+<label><input type="checkbox" id="consent"> This is my photo or I have permission</label><br><br>
+<button onclick="createCustom()">Create My AI</button>
+</div>
+
+<script>
+function startCall(name, desc){
+  alert("Starting video call with " + name + " (AI) - Next we will add real video + voice");
+}
+function createCustom(){
+  const ok = document.getElementById('consent').checked;
+  if(!ok){ alert("Please tick the permission box first"); return; }
+  alert("Your custom AI is created! Next we will add video call screen.");
+}
+</script>
+</body>
+</html>
