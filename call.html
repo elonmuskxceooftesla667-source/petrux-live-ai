@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Petrux Video Call</title>
+<style>
+body{font-family:sans-serif;max-width:420px;margin:auto;background:#111;color:#fff;padding:0}
+.top{text-align:center;padding:20px}
+.top img{width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid #25D366}
+.badge{background:#00e676;color:#000;font-size:12px;padding:3px 10px;border-radius:10px}
+.chat{background:#fff;color:#000;height:300px;overflow:auto;padding:12px}
+.msg{margin-bottom:8px}
+.me{text-align:right}.me span{background:#dcf8c6;padding:8px 12px;border-radius:12px;display:inline-block}
+.ai span{background:#eee;padding:8px 12px;border-radius:12px;display:inline-block}
+.bottom{display:flex;gap:8px;padding:12px;background:#fff}
+.bottom input{flex:1;padding:12px;border-radius:20px;border:1px solid #ddd}
+.bottom button{padding:12px 16px;border-radius:20px;border:none;font-weight:bold;cursor:pointer}
+.send{background:#25D366}.end{background:red;color:#fff}
+</style>
+</head>
+<body>
+<div class="top">
+<img id="avatarImg" src="https://i.pravatar.cc/300?img=12">
+<h2 id="avatarName">Alex <span class="badge">AI</span></h2>
+<p id="avatarDesc">Friendly Male AI</p>
+<p style="font-size:12px;opacity:0.7">AI Avatar - Not a real person</p>
+</div>
+
+<div class="chat" id="chat"></div>
+
+<div class="bottom">
+<input id="input" placeholder="Type a message...">
+<button class="send" onclick="sendMsg()">Send</button>
+<button class="end" onclick="window.location.href='index.html'">End</button>
+</div>
+
+<script>
+// Get name from link ?name=Alex
+const params = new URLSearchParams(window.location.search);
+const name = params.get('name') || 'Alex';
+const desc = params.get('desc') || 'Friendly Male AI';
+const img = params.get('img') || 'https://i.pravatar.cc/300?img=12';
+document.getElementById('avatarName').innerHTML = name + ' <span class="badge">AI</span>';
+document.getElementById('avatarDesc').innerText = desc;
+document.getElementById('avatarImg').src = img;
+
+const chat = document.getElementById('chat');
+function addMsg(text, who){
+  const div = document.createElement('div');
+  div.className = 'msg ' + (who==='me'?'me':'ai');
+  div.innerHTML = '<span>'+text+'</span>';
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+addMsg("Hi, I'm " + name + ". What do you want to learn today?", 'ai');
+
+function sendMsg(){
+  const input = document.getElementById('input');
+  const text = input.value.trim();
+  if(!text) return;
+  addMsg(text, 'me');
+  input.value = '';
+  setTimeout(()=>{
+    let reply = "Got it! As " + name + ", I hear you: " + text;
+    if(name === 'Max Innovator'){
+      reply = "Great question! Elon Musk talks about first-principles thinking - breaking a problem to its basics. For your question '" + text + "', let's break it down...";
+    }
+    if(name === 'Ava') reply = "I love that question! Let's talk about it: " + text;
+    addMsg(reply, 'ai');
+  }, 800);
+}
+</script>
+</body>
+</html>
